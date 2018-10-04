@@ -1,6 +1,7 @@
 .idea
 audio
 dialog_log.txt
+dialog_log.json
 
 # Byte compiled / optimized / DLL files
 __pycache__/
