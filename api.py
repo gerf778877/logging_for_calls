@@ -55,4 +55,4 @@ api.add_resource(UploadAudio, '/save_file_and_text')
 api.add_resource(SaveVoxLog, '/save_vox_log')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=1519, debug=False)
