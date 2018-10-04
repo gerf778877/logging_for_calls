@@ -42,6 +42,7 @@ class SaveVoxLog(Resource):
         parser.add_argument('audio_url')
         parser.add_argument('dialog')
         args = parser.parse_args()
+        print(args)
 
         urllib.request.urlretrieve(args['audio_url'], 'audio/' + request_id + '.mp3')
 
