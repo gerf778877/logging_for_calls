@@ -13,7 +13,8 @@ api = Api(app)
 
 def write_log(json_data):
     log_file = open('dialog_log.json', 'a')
-    json.dump(json_data + '\n', log_file)
+    json.dump(json_data, log_file)
+    log_file.write('\n')
     log_file.close()
 
 
