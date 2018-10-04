@@ -1,5 +1,6 @@
 #!flask/bin/python
 import uuid
+import urllib.request
 
 import werkzeug
 from flask import Flask
@@ -33,7 +34,25 @@ class UploadAudio(Resource):
         write_log(request_id, request_id + ".mp3", dialog)
 
 
-api.add_resource(UploadAudio, '/save_log')
+class SaveVoxLog(Resource):
+    def post(self):
+        request_id = str(uuid.uuid1())
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('audio_url')
+        parser.add_argument('dialog')
+        args = parser.parse_args()
+
+        urllib.request.urlretrieve(args['audio_url'], 'audio/' + request_id + '.mp3')
+
+        dialog = args['dialog']
+        write_log(request_id, request_id + ".mp3", dialog)
+
+        return {"response": "success"}
+
+
+api.add_resource(UploadAudio, '/save_file_and_text')
+api.add_resource(SaveVoxLog, '/save_vox_log')
 
 if __name__ == '__main__':
     app.run(debug=True)
